@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mishra Global Makhana - Design System
+   Premium, earthy, trustworthy. All colors in HSL. */
+
+@layer base {
+  :root {
+    /* Surfaces */
+    --background: 48 33% 97%;          /* off-white #FAFAF9-ish warm */
+    --foreground: 220 26% 14%;         /* charcoal #111827 */
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 26% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 26% 14%;
+
+    /* Brand */
+    --primary: 145 60% 18%;            /* deep green #14532D */
+    --primary-foreground: 48 33% 97%;
+    --primary-glow: 145 50% 32%;
+
+    --accent: 32 95% 44%;              /* warm saffron #D97706 */
+    --accent-foreground: 0 0% 100%;
+    --accent-soft: 38 92% 95%;
+
+    --secondary: 145 25% 94%;
+    --secondary-foreground: 145 60% 18%;
+
+    --muted: 40 20% 94%;
+    --muted-foreground: 220 12% 40%;
+
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 40 18% 88%;
+    --input: 40 18% 88%;
+    --ring: 145 60% 18%;
+
+    --radius: 0.875rem;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(145 60% 14%) 0%, hsl(145 55% 22%) 60%, hsl(32 80% 38%) 130%);
+    --gradient-warm: linear-gradient(135deg, hsl(38 92% 95%) 0%, hsl(48 33% 97%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(48 33% 99%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 1px 2px hsl(145 30% 10% / 0.04), 0 4px 16px hsl(145 30% 10% / 0.06);
+    --shadow-elegant: 0 10px 40px -12px hsl(145 60% 18% / 0.18);
+    --shadow-glow: 0 0 0 1px hsl(32 95% 44% / 0.15), 0 12px 36px -10px hsl(32 95% 44% / 0.35);
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1, h2, h3, h4 { @apply font-display tracking-tight; }
+}
+
+@layer components {
+  .container-tight { @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8; }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary;
+  }
+  .section { @apply py-16 sm:py-24; }
+  .glass-card {
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-soft);
+    @apply rounded-2xl border border-border/70;
+  }
+  .leaf-divider {
+    background-image: radial-gradient(circle at center, hsl(var(--accent) / 0.6) 0 2px, transparent 2.5px);
+    background-size: 14px 14px;
+    height: 6px;
+  }
+}
