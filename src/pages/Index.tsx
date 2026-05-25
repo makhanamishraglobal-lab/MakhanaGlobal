@@ -436,7 +436,7 @@ export default function Index() {
             <p className="mt-4 text-muted-foreground">Have a retail or bulk requirement? We're here to help.</p>
             <ul className="mt-8 space-y-3 text-sm">
               <li className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary"><Phone className="h-4 w-4" /></span> Phone: <span className="font-semibold">+91-7061626429</span></li>
-              <li className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary"><Mail className="h-4 w-4" /></span> Email: <span className="font-semibold">ranjeet109101@gmail.com</span></li>
+              <li className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary"><Mail className="h-4 w-4" /></span> Email: <span className="font-semibold">makhanamishraglobal@gmail.com</span></li>
               <li className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary"><MapPin className="h-4 w-4 text-accent" /></span> Location: <span className="font-semibold">Opposite to Madhveshwar Sthan, Near Saurath Post Office, Saurath Sabha Gachi, Madhubani - 847213</span></li>
             </ul>
           </Reveal>

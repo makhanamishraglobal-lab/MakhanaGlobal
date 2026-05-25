@@ -71,6 +71,7 @@ export async function sendBulkEmail(payload: BulkPayload) {
   await sendAdminEmail({
     to_email: import.meta.env.VITE_EMAILJS_TO_EMAIL,
     form_type: "Bulk",
+    name: payload.fullName,
     full_name: payload.fullName,
     business: payload.business,
     gst: payload.gst,

@@ -30,7 +30,7 @@ export default function Contact() {
             <div className="space-y-4">
               {[
                 { icon: Phone, label: "Phone", value: "+91-7061626429" },
-                { icon: Mail, label: "Email", value: "ranjeet109101@gmail.com" },
+                { icon: Mail, label: "Email", value: "makhanamishraglobal@gmail.com" },
                 {
                   icon: MapPin,
                   label: "Location",

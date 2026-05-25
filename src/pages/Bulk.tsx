@@ -130,7 +130,7 @@ export default function Bulk() {
               <p className="text-sm font-semibold text-primary">Direct contact</p>
               <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 text-accent" /> Phone: <span className="font-semibold text-foreground">+91-7061626429</span></li>
-                <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 text-accent" /> Email: <span className="font-semibold text-foreground">ranjeet109101@gmail.com</span></li>
+                <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 text-accent" /> Email: <span className="font-semibold text-foreground">makhanamishraglobal@gmail.com</span></li>
                 <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 text-accent" /> Location: <span className="font-semibold text-foreground">Opposite to Madhveshwar Sthan, Near Saurath Post Office, Saurath Sabha Gachi, Madhubani - 847213</span></li>
               </ul>
             </div>

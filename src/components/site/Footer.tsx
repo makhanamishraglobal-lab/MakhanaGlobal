@@ -49,7 +49,7 @@ export default function Footer() {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Reach Us</p>
           <ul className="mt-4 space-y-3 text-sm text-primary-foreground/80">
             <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5 text-accent" /> +91-7061626429</li>
-            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 text-accent" /> ranjeet109101@gmail.com</li>
+            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 text-accent" /> makhanamishraglobal@gmail.com</li>
             <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 text-accent" /> Opposite to Madhveshwar Sthan, Near Saurath Post Office, Saurath Sabha Gachi, Madhubani - 847213</li>
           </ul>
         </div>
