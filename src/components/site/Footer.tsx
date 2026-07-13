@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin } from "lucide-react";
-import MgmMark from "@/components/site/MgmMark";
+import logo from "@/assets/mgm-logo.jpeg";
 
 export default function Footer() {
   return (
@@ -8,9 +8,13 @@ export default function Footer() {
       <div className="container-tight py-16 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-accent text-accent-foreground">
-              <MgmMark className="h-6 w-6" />
-            </span>
+            <img
+              src={logo}
+              alt="MGM Makhana logo"
+              width={40}
+              height={40}
+              className="h-10 w-10 rounded-full object-cover"
+            />
             <div>
               <p className="font-display text-lg font-bold">Mishra Global Makhana</p>
               <p className="text-[11px] uppercase tracking-[0.2em] text-accent">Saurath - Madhubani - Bihar</p>
@@ -48,9 +52,9 @@ export default function Footer() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Reach Us</p>
           <ul className="mt-4 space-y-3 text-sm text-primary-foreground/80">
-            <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5 text-accent" /> +91-7061626429</li>
-            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 text-accent" /> makhanamishraglobal@gmail.com</li>
-            <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 text-accent" /> Opposite to Madhveshwar Sthan, Near Saurath Post Office, Saurath Sabha Gachi, Madhubani - 847213</li>
+            <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5 shrink-0 text-accent" /> +91-7061626429</li>
+            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 shrink-0 text-accent" /> <span className="min-w-0 break-all">makhanamishraglobal@gmail.com</span></li>
+            <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 shrink-0 text-accent" /> <span className="min-w-0">Opposite to Madhveshwar Sthan, Near Saurath Post Office, Saurath Sabha Gachi, Madhubani - 847213</span></li>
           </ul>
         </div>
       </div>

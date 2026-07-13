@@ -3,7 +3,6 @@ import emailjs from "@emailjs/browser";
 type EmailJsConfig = {
   serviceId: string;
   adminTemplateId: string;
-  replyTemplateId: string;
   publicKey: string;
   toEmail: string;
 };
@@ -13,6 +12,7 @@ type ContactPayload = {
   phone: string;
   email?: string;
   requirement: string;
+  grade?: string;
   quantity?: string;
   message?: string;
 };
@@ -25,9 +25,7 @@ type BulkPayload = {
   email?: string;
   buyerType: string;
   grade: string;
-  roast: string;
   quantity: string;
-  packaging: string;
   city: string;
   state: string;
   message?: string;
@@ -36,15 +34,14 @@ type BulkPayload = {
 function getEmailJsConfig(): EmailJsConfig {
   const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "";
   const adminTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ADMIN || "";
-  const replyTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_REPLY || "";
   const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "";
   const toEmail = import.meta.env.VITE_EMAILJS_TO_EMAIL || "";
 
-  if (!serviceId || !adminTemplateId || !replyTemplateId || !publicKey || !toEmail) {
+  if (!serviceId || !adminTemplateId || !publicKey || !toEmail) {
     throw new Error("EmailJS is not configured");
   }
 
-  return { serviceId, adminTemplateId, replyTemplateId, publicKey, toEmail };
+  return { serviceId, adminTemplateId, publicKey, toEmail };
 }
 
 async function sendAdminEmail(params: Record<string, string | undefined>) {
@@ -61,6 +58,7 @@ export async function sendContactEmail(payload: ContactPayload) {
     phone: payload.phone,
     email: payload.email,
     requirement: payload.requirement,
+    grade: payload.grade,
     quantity: payload.quantity,
     message: payload.message,
   });
@@ -79,9 +77,7 @@ export async function sendBulkEmail(payload: BulkPayload) {
     email: payload.email,
     buyer_type: payload.buyerType,
     grade: payload.grade,
-    roast: payload.roast,
     quantity: payload.quantity,
-    packaging: payload.packaging,
     city: payload.city,
     state: payload.state,
     message: payload.message,

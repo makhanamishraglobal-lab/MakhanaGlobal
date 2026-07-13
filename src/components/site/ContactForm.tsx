@@ -8,12 +8,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { sendContactEmail } from "@/lib/email";
+import { productNames } from "@/lib/products";
+
+const gradeOptions = ["Not sure yet", ...productNames];
 
 const schema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(80),
   phone: z.string().trim().min(7, "Please enter a valid phone").max(20),
   email: z.string().trim().email("Invalid email").max(120).optional().or(z.literal("")),
   type: z.enum(["Retail", "Bulk"]),
+  grade: z.string().max(60).optional(),
   quantity: z.string().max(40).optional(),
   message: z.string().max(800).optional(),
 });
@@ -31,6 +35,7 @@ export default function ContactForm({ defaultType = "Retail" as "Retail" | "Bulk
       phone: fd.get("phone"),
       email: fd.get("email") || "",
       type: fd.get("type") || defaultType,
+      grade: fd.get("grade") || "",
       quantity: fd.get("quantity") || "",
       message: fd.get("message") || "",
     });
@@ -49,6 +54,7 @@ export default function ContactForm({ defaultType = "Retail" as "Retail" | "Bulk
         phone: parsed.data.phone,
         email: parsed.data.email || undefined,
         requirement: parsed.data.type,
+        grade: parsed.data.grade === "Not sure yet" ? undefined : parsed.data.grade || undefined,
         quantity: parsed.data.quantity || undefined,
         message: parsed.data.message || undefined,
       });
@@ -88,6 +94,15 @@ export default function ContactForm({ defaultType = "Retail" as "Retail" | "Bulk
             <SelectContent>
               <SelectItem value="Retail">Retail</SelectItem>
               <SelectItem value="Bulk">Bulk</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="space-y-2">
+          <Label>Product / Grade</Label>
+          <Select name="grade" defaultValue={gradeOptions[0]}>
+            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {gradeOptions.map((g) => <SelectItem key={g} value={g}>{g}</SelectItem>)}
             </SelectContent>
           </Select>
         </div>

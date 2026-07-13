@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { toast } from "sonner";
 import { sendBulkEmail } from "@/lib/email";
+import { productNames } from "@/lib/products";
 
 const schema = z.object({
   fullName: z.string().trim().min(2, "Required").max(80),
@@ -19,10 +20,8 @@ const schema = z.object({
   phone: z.string().trim().min(7, "Required").max(20),
   email: z.string().trim().email("Invalid email").max(120).optional().or(z.literal("")),
   buyerType: z.enum(["Distributor", "Retailer", "Exporter", "Other"]),
-  grade: z.enum(["Small", "Medium", "Large", "Mix"]),
-  roast: z.enum(["Raw", "Roasted"]),
+  grade: z.enum(productNames),
   quantity: z.string().trim().min(1, "Required").max(40),
-  packaging: z.enum(["Loose", "250g", "500g", "1kg", "Custom"]),
   city: z.string().trim().min(2, "Required").max(60),
   state: z.string().trim().min(2, "Required").max(60),
   message: z.string().max(800).optional(),
@@ -70,9 +69,7 @@ export default function Bulk() {
         email: parsed.data.email || undefined,
         buyerType: parsed.data.buyerType,
         grade: parsed.data.grade,
-        roast: parsed.data.roast,
         quantity: parsed.data.quantity,
-        packaging: parsed.data.packaging,
         city: parsed.data.city,
         state: parsed.data.state,
         message: parsed.data.message || undefined,
@@ -129,9 +126,9 @@ export default function Bulk() {
             <div className="mt-8 glass-card p-6">
               <p className="text-sm font-semibold text-primary">Direct contact</p>
               <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 text-accent" /> Phone: <span className="font-semibold text-foreground">+91-7061626429</span></li>
-                <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 text-accent" /> Email: <span className="font-semibold text-foreground">makhanamishraglobal@gmail.com</span></li>
-                <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 text-accent" /> Location: <span className="font-semibold text-foreground">Opposite to Madhveshwar Sthan, Near Saurath Post Office, Saurath Sabha Gachi, Madhubani - 847213</span></li>
+                <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-accent" /> <span className="min-w-0">Phone: <span className="font-semibold text-foreground">+91-7061626429</span></span></li>
+                <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-accent" /> <span className="min-w-0">Email: <span className="font-semibold text-foreground break-all">makhanamishraglobal@gmail.com</span></span></li>
+                <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" /> <span className="min-w-0">Location: <span className="font-semibold text-foreground">Opposite to Madhveshwar Sthan, Near Saurath Post Office, Saurath Sabha Gachi, Madhubani - 847213</span></span></li>
               </ul>
             </div>
           </Reveal>
@@ -154,10 +151,8 @@ export default function Bulk() {
                   <Field name="phone" label="Phone" type="tel" error={errors.phone} required />
                   <Field name="email" label="Email" type="email" error={errors.email} />
                   <SelectField name="buyerType" label="Buyer type" options={["Distributor","Retailer","Exporter","Other"]} />
-                  <SelectField name="grade" label="Grade" options={["Small","Medium","Large","Mix"]} />
-                  <SelectField name="roast" label="Type" options={["Raw","Roasted"]} />
+                  <SelectField name="grade" label="Grade" options={productNames} />
                   <Field name="quantity" label="Quantity (kg)" placeholder="e.g. 100" error={errors.quantity} required />
-                  <SelectField name="packaging" label="Packaging" options={["Loose","250g","500g","1kg","Custom"]} />
                   <Field name="city" label="Delivery city" error={errors.city} required />
                   <Field name="state" label="State" error={errors.state} required />
                 </div>

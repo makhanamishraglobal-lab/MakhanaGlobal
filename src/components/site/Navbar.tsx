@@ -1,9 +1,9 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import MgmMark from "@/components/site/MgmMark";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/mgm-logo.jpeg";
 
 const links = [
   { to: "/", label: "Home" },
@@ -37,9 +37,13 @@ export default function Navbar() {
     >
       <div className="container-tight flex h-16 items-center justify-between gap-4">
         <Link to="/" className="flex items-center gap-2 group">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary text-primary-foreground shadow-soft transition-transform group-hover:rotate-[-6deg]">
-            <MgmMark className="h-6 w-6" />
-          </span>
+          <img
+            src={logo}
+            alt="MGM Makhana logo"
+            width={36}
+            height={36}
+            className="h-9 w-9 rounded-full object-cover shadow-soft transition-transform group-hover:rotate-[-6deg]"
+          />
           <span className="leading-tight">
             <span className="block font-display text-base font-bold text-primary">Mishra Global</span>
             <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Makhana</span>
@@ -66,7 +70,7 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-2">
           <Button asChild variant="outline" size="sm">
-            <Link to="/products">Shop Retail</Link>
+            <Link to="/products">View Products</Link>
           </Button>
           <Button asChild variant="hero" size="sm">
             <Link to="/bulk">Bulk Order</Link>
@@ -102,7 +106,7 @@ export default function Navbar() {
             ))}
             <div className="flex gap-2 pt-3">
               <Button asChild variant="outline" className="flex-1">
-                <Link to="/products">Shop Retail</Link>
+                <Link to="/products">View Products</Link>
               </Button>
               <Button asChild variant="hero" className="flex-1">
                 <Link to="/bulk">Bulk Order</Link>

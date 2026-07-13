@@ -4,20 +4,19 @@ import {
   ArrowRight, Truck, Sprout, ShieldCheck, Boxes, Tags, Package,
   Heart, Award, Sparkles, MapPin, Quote, ChevronDown, Phone, Mail,
 } from "lucide-react";
-import MgmMark from "@/components/site/MgmMark";
 import SiteLayout from "@/components/site/SiteLayout";
 import Reveal from "@/components/site/Reveal";
 import ContactForm from "@/components/site/ContactForm";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import ProductPouch from "@/components/site/ProductPouch";
+import { products as catalogue, gradeFamilies } from "@/lib/products";
 
+import logo from "@/assets/mgm-logo.jpeg";
 import hero from "@/assets/hero-makhana.jpg";
 import farm from "@/assets/farm-bihar.jpg";
 import warehouse from "@/assets/warehouse.jpg";
-import raw from "@/assets/product-raw.jpg";
 import roasted from "@/assets/product-roasted.jpg";
-import graded from "@/assets/product-graded.jpg";
-import flavored from "@/assets/product-flavored.jpg";
 
 const trustBadges = [
   { icon: Sprout, label: "Direct Farmer Sourcing" },
@@ -34,12 +33,14 @@ const whyUs = [
   { icon: Package, title: "Custom packaging", desc: "Loose, retail packs or your private-label branding." },
 ];
 
-const products = [
-  { img: raw, title: "Raw Makhana", tag: "Unprocessed", desc: "Natural, sun-dried fox nuts straight from the source." },
-  { img: roasted, title: "Roasted Makhana", tag: "Ready-to-eat", desc: "Lightly roasted for a crisp, satisfying crunch." },
-  { img: graded, title: "Graded Makhana", tag: "Size-sorted", desc: "Uniform sizes - small, medium, large or mixed." },
-  { img: flavored, title: "Flavored Makhana", tag: "On request", desc: "Custom seasonings tailored to your brand profile." },
-];
+// Flagship per family, chosen so the four pouches side by side stay visually distinct.
+const flagshipRank: Record<string, number> = { "6+": 1, "5+": 3, "5": 5, "4+": 8 };
+const products = gradeFamilies.map((g) => ({
+  flagship: catalogue.find((p) => p.rank === flagshipRank[g.grade])!,
+  title: `${g.grade} Grade Makhana`,
+  tag: g.bestFor,
+  desc: g.benefit,
+}));
 
 const process = [
   "Sourcing from local farmers",
@@ -58,7 +59,7 @@ const benefits = [
 
 const faqs = [
   { q: "Do you supply pan-India?", a: "Yes, we deliver across India through trusted logistics partners and offer dedicated freight for bulk orders." },
-  { q: "What grades/sizes are available?", a: "We supply small, medium and large grades, plus a mixed option. Custom grading is available for bulk orders." },
+  { q: "What grades/sizes are available?", a: "We supply ten grades across the 6+, 5+, 5 and 4+ families - from 6+ Handpicked Supreme (export premium) to 4+ Exclusive Grade (economical bulk), in Hand Pick and Non Hand Pick options." },
   { q: "Do you offer custom packaging / private label?", a: "Yes. We offer custom pack sizes, branded pouches and private-label production for distributors and exporters." },
   { q: "What is the typical lead time for bulk orders?", a: "Most bulk orders dispatch within 5-10 working days depending on quantity, packing and destination." },
   { q: "How should makhana be stored?", a: "Store in an airtight container in a cool, dry place away from direct sunlight to retain freshness and crunch." },
@@ -106,7 +107,7 @@ export default function Index() {
               className="mt-8 flex flex-wrap gap-3"
             >
               <Button asChild variant="hero" size="xl">
-                <Link to="/products">Shop Retail <ArrowRight className="h-4 w-4" /></Link>
+                <Link to="/products">View Grades & Prices <ArrowRight className="h-4 w-4" /></Link>
               </Button>
               <Button asChild variant="heroOutline" size="xl">
                 <Link to="/bulk">Wholesale Inquiry</Link>
@@ -118,7 +119,7 @@ export default function Index() {
             >
               {trustBadges.map(({ icon: Icon, label }) => (
                 <li key={label} className="flex items-center gap-2 text-sm text-primary-foreground/85">
-                  <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent/20 text-accent">
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-accent/20 text-accent">
                     <Icon className="h-4 w-4" />
                   </span>
                   {label}
@@ -137,7 +138,7 @@ export default function Index() {
               <img src={hero} alt="Premium makhana fox nuts in a wooden bowl" width={1536} height={1280} className="h-[520px] w-full object-cover" />
             </div>
             <div className="absolute -bottom-6 -left-6 glass-card flex items-center gap-3 px-4 py-3 text-foreground">
-              <div className="grid h-10 w-10 place-items-center rounded-full bg-primary text-primary-foreground"><MgmMark className="h-5 w-5" /></div>
+              <img src={logo} alt="MGM Makhana logo" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
               <div>
                 <p className="text-xs uppercase tracking-wider text-muted-foreground">Origin</p>
                 <p className="text-sm font-semibold">Saurath, Madhubani</p>
@@ -229,8 +230,8 @@ export default function Index() {
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div className="max-w-xl">
                 <span className="eyebrow">Our products</span>
-                <h2 className="mt-4 text-3xl font-bold text-primary sm:text-4xl">Crafted for every kind of buyer</h2>
-                <p className="mt-3 text-muted-foreground">Available for Retail Customers · Distributors · Retailers · Exporters</p>
+                <h2 className="mt-4 text-3xl font-bold text-primary sm:text-4xl">Quality grades for every kind of buyer</h2>
+                <p className="mt-3 text-muted-foreground">Ten grades across the 6+ · 5+ · 5 · 4+ families - for Distributors, Retailers & Exporters</p>
               </div>
               <Button asChild variant="outline" size="lg" className="hidden sm:inline-flex">
                 <Link to="/products">View all products <ArrowRight className="h-4 w-4" /></Link>
@@ -241,9 +242,8 @@ export default function Index() {
             {products.map((p, i) => (
               <Reveal key={p.title} delay={i * 0.05}>
                 <article className="group glass-card overflow-hidden transition-all hover:-translate-y-1 hover:shadow-elegant">
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img src={p.img} alt={p.title} loading="lazy" width={1024} height={768}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="grid place-items-center bg-gradient-warm py-6">
+                    <ProductPouch product={p.flagship} className="h-44 w-auto transition-transform duration-500 group-hover:scale-105" />
                   </div>
                   <div className="p-5">
                     <span className="text-[11px] font-semibold uppercase tracking-wider text-accent">{p.tag}</span>
@@ -317,7 +317,7 @@ export default function Index() {
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {benefits.map((b) => (
                 <li key={b} className="flex items-start gap-3 rounded-xl bg-card p-4 shadow-soft">
-                  <span className="mt-0.5 grid h-6 w-6 place-items-center rounded-full bg-accent text-accent-foreground text-xs font-bold">✓</span>
+                  <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-accent text-accent-foreground text-xs font-bold">✓</span>
                   <span className="text-sm font-medium">{b}</span>
                 </li>
               ))}
@@ -435,9 +435,9 @@ export default function Index() {
             <h2 className="mt-4 text-3xl font-bold text-primary sm:text-4xl">Let's talk makhana</h2>
             <p className="mt-4 text-muted-foreground">Have a retail or bulk requirement? We're here to help.</p>
             <ul className="mt-8 space-y-3 text-sm">
-              <li className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary"><Phone className="h-4 w-4" /></span> Phone: <span className="font-semibold">+91-7061626429</span></li>
-              <li className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary"><Mail className="h-4 w-4" /></span> Email: <span className="font-semibold">makhanamishraglobal@gmail.com</span></li>
-              <li className="flex items-center gap-3"><span className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary"><MapPin className="h-4 w-4 text-accent" /></span> Location: <span className="font-semibold">Opposite to Madhveshwar Sthan, Near Saurath Post Office, Saurath Sabha Gachi, Madhubani - 847213</span></li>
+              <li className="flex items-start gap-3"><span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary"><Phone className="h-4 w-4" /></span> <span className="pt-2">Phone: <span className="font-semibold">+91-7061626429</span></span></li>
+              <li className="flex items-start gap-3"><span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary"><Mail className="h-4 w-4" /></span> <span className="pt-2 min-w-0">Email: <span className="font-semibold break-all">makhanamishraglobal@gmail.com</span></span></li>
+              <li className="flex items-start gap-3"><span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary"><MapPin className="h-4 w-4 text-accent" /></span> <span className="pt-2">Location: <span className="font-semibold">Opposite to Madhveshwar Sthan, Near Saurath Post Office, Saurath Sabha Gachi, Madhubani - 847213</span></span></li>
             </ul>
           </Reveal>
           <Reveal delay={0.1}>

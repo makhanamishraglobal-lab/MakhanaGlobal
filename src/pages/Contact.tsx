@@ -38,12 +38,12 @@ export default function Contact() {
                 },
               ].map((c) => (
                 <div key={c.label} className="glass-card p-5 flex items-start gap-4">
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
                     <c.icon className="h-5 w-5" />
                   </span>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-xs uppercase tracking-wider text-muted-foreground">{c.label}</p>
-                    <p className="mt-0.5 font-semibold text-foreground">{c.value}</p>
+                    <p className="mt-0.5 font-semibold text-foreground break-words">{c.value}</p>
                   </div>
                 </div>
               ))}
